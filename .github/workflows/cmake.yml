@@ -3,8 +3,8 @@ name: CMakgithub.sha
 on:
   push:
     branches:
-      - master
-      - feature/github_actions
+        [ master ]
+        [ feature/github_actions ]
 
 env:
   BUILD_TYPE: Release
@@ -23,9 +23,6 @@ jobs:
     
     - name: Application name
       run:  echo "Packeg name:${{env.PACKEGE_NAME }}"
-      
-
-     
      
     - name: apt-get lib
       run: sudo apt-get install libgtest-dev && sudo apt-get install cmake
@@ -35,8 +32,7 @@ jobs:
     
     - name: ln
       run:  sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a
-   
-    
+       
 #      run: sudo apt-get install libgtest-dev && sudo apt-get install cmake && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a
 
     - name: List current folder on the start
