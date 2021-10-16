@@ -5,7 +5,9 @@ on:
     branches:
       - master
       - feature/github_actions
-      - pull-requestt
+     
+  pull_request:
+    branches: [ main]
 
 env:
   BUILD_TYPE: Release
