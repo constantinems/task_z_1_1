@@ -3,8 +3,8 @@ name: CMakgithub.sha
 on:
   push:
     branches:
-        [ master ]
-        [ feature/github_actions ]
+        - master
+        - feature/github_actions
 
 env:
   BUILD_TYPE: Release
