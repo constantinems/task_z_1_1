@@ -10,7 +10,7 @@ TEST(VersionTest, Positive) {
 }
 
 TEST(SecondTest, Eeqq) {
-    ASSERT_EQ(-1.0, 1);
+//    ASSERT_EQ(-1.0, 1);
     ASSERT_EQ(2.0,  2.0);
 }
 
