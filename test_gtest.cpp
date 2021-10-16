@@ -6,7 +6,7 @@
 
 TEST(VersionTest, Positive) {
      ASSERT_EQ(6, std::sqrt(36.0));
-     ASSERT_GE(1, version());
+     ASSERT_GE(version(), 1);
 }
 
 TEST(SecondTest, Eeqq) {
