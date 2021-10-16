@@ -34,10 +34,10 @@ jobs:
       run: sudo apt-get install libgtest-dev && sudo apt-get install cmake
       
     - name: install lib
-      run: cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make 
+      run: cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib
       
-    - name: copy lib
-      run:  ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib
+  #  - name: copy lib
+  #    run:  ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib
     
     - name: ln
       run:  sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a
