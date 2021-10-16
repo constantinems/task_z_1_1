@@ -2,14 +2,12 @@ name: CMakgithub.sha
 
 on:
   push:
-    branches: [ main]
-  pull_request:
-    branches: [ main]
+    branches:
+      - master
+      - feature/github_actions
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  APPLICATION_NAME: "MyProgrammTask1"
   PACKEGE_NAME    : "task_deploy_ver_${{github.sha}}"
 
 jobs:
@@ -26,8 +24,7 @@ jobs:
     - name: Application name
       run:  echo "Packeg name:${{env.PACKEGE_NAME }}"
       
-      #echo "Application name:${{env.APPLICATION_NAME}}"
-       # echo "Packeg name: ${{env.PACKEGE_NAME }}"
+
      
      
     - name: apt-get lib
@@ -35,9 +32,6 @@ jobs:
       
     - name: install lib
       run: cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib
-      
-  #  - name: copy lib
-  #    run:  ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib
     
     - name: ln
       run:  sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a
@@ -45,11 +39,17 @@ jobs:
     
 #      run: sudo apt-get install libgtest-dev && sudo apt-get install cmake && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && ls -la && cd lib && ls -la && sudo mkdir /usr/local/lib/gtest && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/gtest/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/gtest/libgtest_main.a
 
-
     - name: List current folder on the start
       run:  ls -la
     
     - uses: actions/checkout@v2
+      with:
+          submodules: true
+      run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
+      run: cmake . -DPATCH_VERSION=${{github.run_number}}
+      run: cmake --build .
+      run: cmake --build . --target test
+      run: cmake --build . --target package
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
